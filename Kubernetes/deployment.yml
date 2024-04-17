@@ -2,10 +2,10 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-    name: default
+    name: netflix
     namespace: spacex-argocd
 spec:
-    project: netflix
+    project: default
     source:
         repoURL: 'https://github.com/VaishnaviDeshmukh2002/DevSecOps-Project.git'
         path: Kubernetes
