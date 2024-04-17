@@ -1,21 +1,19 @@
-apiVersion: apps/v1
-kind: Deployment
+# nginx.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
 metadata:
-  name: netflix-app
-  labels:
-    app: netflix-app
+    name: default
+    namespace: spacex-argocd
 spec:
-  replicas: 2
-  selector:
-    matchLabels:
-      app: netflix-app
-  template:
-    metadata:
-      labels:
-        app: netflix-app
-    spec:
-      containers:
-      - name: netflix-app
-        image: vaishnavideshmukh2002/netflix:latest
-        ports:
-        - containerPort: 80
+    project: netflix
+    source:
+        repoURL: 'https://github.com/VaishnaviDeshmukh2002/DevSecOps-Project.git'
+        path: Kubernetes
+        targetRevision: main
+    destination:
+        server: 'https://kubernetes.default.svc'
+        namespace: vaish
+    syncPolicy:
+        automated:
+            selfHeal: true
+            prune: true
